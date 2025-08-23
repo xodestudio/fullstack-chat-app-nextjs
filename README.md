@@ -16,6 +16,7 @@ A modern, production-grade chat application built with Next.js, featuring real-t
 ## Tech Stack
 
 ### Frontend
+
 - **Next.js 15** - React framework with App Router
 - **TypeScript** - Type-safe development
 - **Tailwind CSS** - Utility-first CSS framework
@@ -25,6 +26,7 @@ A modern, production-grade chat application built with Next.js, featuring real-t
 - **Socket.io Client** - Real-time communication
 
 ### Backend
+
 - **Next.js API Routes** - Serverless API endpoints
 - **NextAuth.js** - Authentication solution
 - **MongoDB** - NoSQL database with Mongoose ODM
@@ -44,24 +46,28 @@ A modern, production-grade chat application built with Next.js, featuring real-t
 ## Installation
 
 1. **Clone the repository**
+
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/xodestudio/fullstack-chat-app-nextjs
    cd chat-app
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Environment Setup**
-   
+
    Copy the environment template:
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Update `.env.local` with your credentials:
+
    ```env
    # Database
    MONGODB_URI=mongodb://localhost:27017/chat-app
@@ -92,11 +98,13 @@ A modern, production-grade chat application built with Next.js, featuring real-t
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
    The application will be available at:
+
    - Main app: http://localhost:3000
    - Socket.io server: http://localhost:3001
 
@@ -133,24 +141,28 @@ chat-app/
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - User registration
 - `POST /api/auth/verify-email` - Email verification
 - `POST /api/auth/resend-otp` - Resend verification code
 - `GET/POST /api/auth/[...nextauth]` - NextAuth.js endpoints
 
 ### Chat
+
 - `GET /api/chat` - Get user's chats
 - `POST /api/chat` - Create new chat
 - `GET /api/chat/[chatId]/messages` - Get chat messages
 - `POST /api/chat/messages` - Send message
 
 ### File Upload
+
 - `POST /api/upload` - Upload file to Cloudinary
 - `DELETE /api/upload` - Delete file from Cloudinary
 
 ## Features in Detail
 
 ### Authentication System
+
 - Email/password registration with verification
 - Google OAuth integration
 - JWT-based session management
@@ -158,6 +170,7 @@ chat-app/
 - Password reset functionality
 
 ### Real-time Messaging
+
 - Instant message delivery
 - Typing indicators
 - User presence (online/offline)
@@ -165,6 +178,7 @@ chat-app/
 - Group chat support
 
 ### File Sharing
+
 - Drag and drop file upload
 - Support for all file types (images, videos, documents, etc.)
 - File preview in chat
@@ -172,6 +186,7 @@ chat-app/
 - File size limits and validation
 
 ### Responsive Design
+
 - Mobile-first approach
 - Touch-friendly interface
 - Adaptive layouts
@@ -189,6 +204,7 @@ chat-app/
 ### Code Quality
 
 The project includes:
+
 - TypeScript for type safety
 - ESLint for code linting
 - Zod for runtime validation
@@ -210,6 +226,7 @@ Ensure all environment variables are properly set in your production environment
 ### Build and Deploy
 
 1. **Build the application**
+
    ```bash
    npm run build
    ```
