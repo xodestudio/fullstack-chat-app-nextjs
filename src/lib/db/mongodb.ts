@@ -29,6 +29,7 @@ export async function connectDB(): Promise<typeof mongoose> {
   if (!cached!.promise) {
     const opts = {
       bufferCommands: false,
+      maxPoolSize: 10,
     };
 
     cached!.promise = mongoose.connect(MONGODB_URI, opts);
@@ -43,4 +44,3 @@ export async function connectDB(): Promise<typeof mongoose> {
 
   return cached!.conn;
 }
-

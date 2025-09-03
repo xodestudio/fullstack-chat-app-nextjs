@@ -1,22 +1,19 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { MongoClient } from "mongodb";
 import bcrypt from "bcryptjs";
 import { connectDB } from "../db/mongodb";
 import { User } from "@/models/User";
 
-const client = new MongoClient(process.env.MONGODB_URI!);
-const clientPromise = client.connect();
-
 export const authOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise),
   providers: [
+    // Google OAuth login
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+
+    // Custom credentials login
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -45,6 +42,7 @@ export const authOptions: NextAuthOptions = {
             return null;
           }
 
+          // email verify check
           if (!user.isVerified) {
             throw new Error("Please verify your email before logging in");
           }
@@ -62,9 +60,11 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
   session: {
     strategy: "jwt",
   },
+
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -79,9 +79,10 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+
+  secret: process.env.NEXTAUTH_SECRET,
+
   pages: {
     signIn: "/auth/signin",
-    signUp: "/auth/signup",
   },
 };
-

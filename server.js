@@ -1,8 +1,8 @@
-const { createServer } = require("http");
-const { parse } = require("url");
-const next = require("next");
-const { Server } = require("socket.io");
-const jwt = require("jsonwebtoken");
+import { createServer } from "http";
+import { parse } from "url";
+import next from "next";
+import { Server } from "socket.io";
+import jwt from "jsonwebtoken";
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = "localhost";
@@ -44,13 +44,16 @@ app.prepare().then(() => {
   io.use(async (socket, next) => {
     try {
       const token = socket.handshake.auth.token;
-      
+
       if (!token) {
         return next(new Error("Authentication token required"));
       }
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || "development-jwt-secret");
-      
+      const decoded = jwt.verify(
+        token,
+        process.env.JWT_SECRET || "development-jwt-secret"
+      );
+
       socket.userId = decoded.userId;
       next();
     } catch (error) {
@@ -108,7 +111,7 @@ app.prepare().then(() => {
     // Handle disconnection
     socket.on("disconnect", () => {
       console.log(`User disconnected: ${socket.userId}`);
-      
+
       // Remove user from connected users
       connectedUsers.delete(socket.userId);
       userSockets.delete(socket.id);
@@ -133,7 +136,8 @@ app.prepare().then(() => {
       process.exit(1);
     })
     .listen(socketPort, () => {
-      console.log(`> Socket.io server ready on http://${hostname}:${socketPort}`);
+      console.log(
+        `> Socket.io server ready on http://${hostname}:${socketPort}`
+      );
     });
 });
-

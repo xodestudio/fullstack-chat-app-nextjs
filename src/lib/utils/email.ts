@@ -13,7 +13,7 @@ export async function sendVerificationEmail(
 ): Promise<void> {
   try {
     await resend.emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "noreply@yourdomain.com",
+      from: process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev",
       to: email,
       subject: "Verify Your Email - Chat App",
       html: `
@@ -79,7 +79,7 @@ export async function sendVerificationEmail(
             
             <div class="footer">
               <p>If you didn't create an account with Chat App, please ignore this email.</p>
-              <p>For support, contact us at support@yourdomain.com</p>
+              <p>For support, contact us at support@gmail.com</p>
             </div>
           </div>
         </body>
@@ -98,7 +98,7 @@ export async function sendPasswordResetEmail(
   resetToken: string
 ): Promise<void> {
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${resetToken}`;
-  
+
   try {
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL || "noreply@yourdomain.com",
@@ -171,4 +171,3 @@ export async function sendPasswordResetEmail(
     throw new Error("Failed to send password reset email");
   }
 }
-
